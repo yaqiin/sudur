@@ -20,6 +20,7 @@ html, body {
   z-index: 50;
   text-align: center;
   padding: 0 20px;
+  padding-bottom: 100px;
 }
 
 .verse-text {
@@ -29,6 +30,7 @@ html, body {
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
   margin: 0;
   line-height: 1.6;
+  margin-bottom: 20px;
 }
 
 .container {
@@ -450,32 +452,134 @@ svg {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.color-picker-wrapper {
+  position: relative;
+}
+
+.color-picker-panel {
+  position: absolute;
+  bottom: 60px;
+  left: 0;
+  background-color: rgba(45, 52, 64, 0.98);
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  z-index: 200;
+  min-width: 200px;
+}
+
+.color-picker-panel.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
 .color-options {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  margin-bottom: 24px;
+  gap: 8px;
 }
 
 .color-option {
-  width: 100%;
-  aspect-ratio: 1;
-  border-radius: 12px;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
   cursor: pointer;
-  border: 3px solid transparent;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  border: 2px solid transparent;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
 .color-option:hover {
-  transform: scale(1.1);
+  transform: scale(1.15);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .color-option.active {
   border-color: #e63946;
-  box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.3);
+  box-shadow: 0 0 0 2px rgba(230, 57, 70, 0.4);
+  transform: scale(1.1);
 }
+
+.download-wrapper {
+  position: relative;
+}
+
+.download-panel {
+  position: absolute;
+  bottom: 60px;
+  left: 0;
+  background-color: rgba(45, 52, 64, 0.98);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  z-index: 200;
+  min-width: 280px;
+}
+
+.download-panel.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.download-panel h3 {
+  color: #ffffff;
+  margin: 0 0 16px 0;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: right;
+}
+
+.download-panel .download-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.download-panel .download-option-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(34, 40, 49, 0.6);
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: right;
+}
+
+.download-panel .download-option-btn:hover {
+  background-color: rgba(34, 40, 49, 0.8);
+  border-color: #e63946;
+  transform: translateX(-4px);
+}
+
+.download-panel .download-option-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.download-panel .download-option-size {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
 
 @media print {
   body {
@@ -503,10 +607,12 @@ svg {
   .quran-verse {
     top: 15px;
     padding: 0 15px;
+    padding-bottom: 120px;
   }
 
   .verse-text {
     font-size: 16px;
+    margin-bottom: 30px;
   }
 
   .container {

@@ -87,63 +87,62 @@
   </div>
 
   <div class="action-buttons">
-    <button id="color-picker-btn" class="action-btn" title="اختر لون الخلفية">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"></circle>
-        <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"></circle>
-        <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"></circle>
-        <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"></circle>
-        <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.926 1.648-1.648 0-.437-.18-.835-.437-1.125l-.027-.026c-.26-.26-.437-.65-.437-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"></path>
-      </svg>
-    </button>
-    <button id="download-btn" class="action-btn" title="تحميل الصورة">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-        <polyline points="7 10 12 15 17 10"></polyline>
-        <line x1="12" y1="15" x2="12" y2="3"></line>
-      </svg>
-    </button>
-  </div>
-
-  <div id="color-picker-modal" class="modal">
-    <div class="modal-content">
-      <h2>اختر لون الخلفية</h2>
-      <div class="color-options">
-        <div class="color-option" data-color="gradient-1" style="background: linear-gradient(135deg, #1a1f2e 0%, #2d1b3d 50%, #1a1f2e 100%);"></div>
-        <div class="color-option" data-color="gradient-2" style="background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);"></div>
-        <div class="color-option" data-color="gradient-3" style="background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #1e3c72 100%);"></div>
-        <div class="color-option" data-color="gradient-4" style="background: linear-gradient(135deg, #2d1b3d 0%, #8b5a9f 50%, #2d1b3d 100%);"></div>
-        <div class="color-option" data-color="gradient-5" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);"></div>
-        <div class="color-option" data-color="gradient-6" style="background: linear-gradient(135deg, #2c1810 0%, #8b4513 50%, #2c1810 100%);"></div>
-        <div class="color-option" data-color="gradient-7" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);"></div>
-        <div class="color-option" data-color="gradient-8" style="background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 50%, #415a77 100%);"></div>
-      </div>
-      <div class="modal-buttons">
-        <button id="color-picker-cancel" class="modal-btn cancel-btn">إلغاء</button>
+    <div class="color-picker-wrapper">
+      <button id="color-picker-btn" class="action-btn" title="اختر لون الخلفية">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"></circle>
+          <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"></circle>
+          <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"></circle>
+          <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"></circle>
+          <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.926 1.648-1.648 0-.437-.18-.835-.437-1.125l-.027-.026c-.26-.26-.437-.65-.437-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"></path>
+        </svg>
+      </button>
+      <div id="color-picker-panel" class="color-picker-panel">
+        <div class="color-options">
+          <div class="color-option" data-color="gradient-1" style="background: linear-gradient(135deg, #1a1f2e 0%, #2d1b3d 50%, #1a1f2e 100%);"></div>
+          <div class="color-option" data-color="gradient-2" style="background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);"></div>
+          <div class="color-option" data-color="gradient-3" style="background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #1e3c72 100%);"></div>
+          <div class="color-option" data-color="gradient-4" style="background: linear-gradient(135deg, #2d1b3d 0%, #8b5a9f 50%, #2d1b3d 100%);"></div>
+          <div class="color-option" data-color="gradient-5" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);"></div>
+          <div class="color-option" data-color="gradient-6" style="background: linear-gradient(135deg, #2c1810 0%, #8b4513 50%, #2c1810 100%);"></div>
+          <div class="color-option" data-color="gradient-7" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);"></div>
+          <div class="color-option" data-color="gradient-8" style="background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 50%, #415a77 100%);"></div>
+        </div>
       </div>
     </div>
-  </div>
-
-  <div id="download-modal" class="modal">
-    <div class="modal-content">
-      <h2>تحميل الصورة</h2>
-      <div class="download-options">
-        <button class="download-option-btn" data-width="1920" data-height="1080">
-          <div class="download-option-title">كمبيوتر</div>
-          <div class="download-option-size">1920 × 1080</div>
-        </button>
-        <button class="download-option-btn" data-width="1080" data-height="1920">
-          <div class="download-option-title">موبايل</div>
-          <div class="download-option-size">1080 × 1920</div>
-        </button>
+    <div class="download-wrapper">
+      <button id="download-btn" class="action-btn" title="تحميل الصورة">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+      </button>
+      <div id="download-panel" class="download-panel">
+        <h3>تحميل الصورة</h3>
+        <div class="download-options">
+          <button class="download-option-btn" data-width="1920" data-height="1080">
+            <div class="download-option-title">كمبيوتر</div>
+            <div class="download-option-size">1920 × 1080</div>
+          </button>
+          <button class="download-option-btn" data-width="1080" data-height="1920">
+            <div class="download-option-title">موبايل</div>
+            <div class="download-option-size">1080 × 1920</div>
+          </button>
         <button class="download-option-btn" id="custom-download-btn">
           <div class="download-option-title">حجم مخصص</div>
           <div class="download-option-size">اختر الحجم</div>
         </button>
       </div>
-      <div id="custom-size-inputs" class="custom-size-inputs" style="display: none;">
+    </div>
+  </div>
+
+  <div id="custom-size-modal" class="modal">
+    <div class="modal-content">
+      <h2>حجم مخصص</h2>
+      <div id="custom-size-inputs" class="custom-size-inputs">
         <div class="input-group">
           <label for="custom-width">العرض (بكسل)</label>
           <input type="number" id="custom-width" min="100" max="10000" value="1920">
@@ -152,12 +151,13 @@
           <label for="custom-height">الارتفاع (بكسل)</label>
           <input type="number" id="custom-height" min="100" max="10000" value="1080">
         </div>
-        <button id="custom-download-confirm" class="modal-btn download-btn-primary">تحميل</button>
       </div>
       <div class="modal-buttons">
-        <button id="download-modal-cancel" class="modal-btn cancel-btn">إلغاء</button>
+        <button id="custom-size-cancel" class="modal-btn cancel-btn">إلغاء</button>
+        <button id="custom-download-confirm" class="modal-btn download-btn-primary">تحميل</button>
       </div>
     </div>
+  </div>
   </div>
 
   <footer class="footer">

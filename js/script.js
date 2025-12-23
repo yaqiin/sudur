@@ -94,17 +94,16 @@ const getUIElements = () => ({
   zoomOut: document.getElementById('zoom-out'),
   zoomReset: document.getElementById('zoom-reset'),
   colorPickerBtn: document.getElementById('color-picker-btn'),
-  colorPickerModal: document.getElementById('color-picker-modal'),
-  colorPickerCancel: document.getElementById('color-picker-cancel'),
+  colorPickerPanel: document.getElementById('color-picker-panel'),
   downloadBtn: document.getElementById('download-btn'),
   searchInput: document.getElementById('search-input'),
   clearBtn: document.getElementById('clear-search'),
   resultsPanel: document.getElementById('search-results-panel'),
   results: document.getElementById('search-results'),
-  downloadModal: document.getElementById('download-modal'),
-  modalCancel: document.getElementById('download-modal-cancel'),
+  downloadPanel: document.getElementById('download-panel'),
   customBtn: document.getElementById('custom-download-btn'),
-  customInputs: document.getElementById('custom-size-inputs'),
+  customSizeModal: document.getElementById('custom-size-modal'),
+  customSizeCancel: document.getElementById('custom-size-cancel'),
   customWidth: document.getElementById('custom-width'),
   customHeight: document.getElementById('custom-height'),
   customConfirm: document.getElementById('custom-download-confirm'),
@@ -235,31 +234,39 @@ const scrollToSurah = (group, container) => {
 };
 
 const setupDownload = (els, svg) => {
-  els.downloadBtn.addEventListener('click', () => {
-    els.downloadModal.classList.add('active');
-  });
+  const showPanel = () => {
+    els.downloadPanel.classList.add('active');
+  };
 
-  els.modalCancel.addEventListener('click', () => {
-    closeDownloadModal(els);
-  });
+  const hidePanel = () => {
+    els.downloadPanel.classList.remove('active');
+  };
 
-  els.downloadModal.addEventListener('click', (e) => {
-    if (e.target === els.downloadModal) {
-      closeDownloadModal(els);
-    }
-  });
+  const wrapper = els.downloadBtn.closest('.download-wrapper');
+  
+  wrapper.addEventListener('mouseenter', showPanel);
+  wrapper.addEventListener('mouseleave', hidePanel);
 
   els.downloadOptions.forEach(btn => {
     if (btn.id !== 'custom-download-btn') {
       btn.addEventListener('click', () => {
         downloadImage(parseInt(btn.dataset.width), parseInt(btn.dataset.height), svg);
-        els.downloadModal.classList.remove('active');
       });
     }
   });
 
   els.customBtn.addEventListener('click', () => {
-    els.customInputs.style.display = els.customInputs.style.display === 'none' ? 'block' : 'none';
+    els.customSizeModal.classList.add('active');
+  });
+
+  els.customSizeCancel.addEventListener('click', () => {
+    els.customSizeModal.classList.remove('active');
+  });
+
+  els.customSizeModal.addEventListener('click', (e) => {
+    if (e.target === els.customSizeModal) {
+      els.customSizeModal.classList.remove('active');
+    }
   });
 
   els.customConfirm.addEventListener('click', () => {
@@ -267,16 +274,11 @@ const setupDownload = (els, svg) => {
     const h = parseInt(els.customHeight.value);
     if (w >= 100 && w <= 10000 && h >= 100 && h <= 10000) {
       downloadImage(w, h, svg);
-      closeDownloadModal(els);
+      els.customSizeModal.classList.remove('active');
     } else {
       alert('الرجاء إدخال أبعاد صحيحة بين 100 و 10000 بكسل');
     }
   });
-};
-
-const closeDownloadModal = (els) => {
-  els.downloadModal.classList.remove('active');
-  els.customInputs.style.display = 'none';
 };
 
 const downloadImage = (w, h, svg) => {
@@ -383,26 +385,24 @@ const setupColorPicker = (els) => {
   const savedColor = localStorage.getItem('backgroundColor') || 'gradient-1';
   applyBackgroundColor(savedColor, colorMap);
 
-  els.colorPickerBtn.addEventListener('click', () => {
-    els.colorPickerModal.classList.add('active');
-  });
+  const showPanel = () => {
+    els.colorPickerPanel.classList.add('active');
+  };
 
-  els.colorPickerCancel.addEventListener('click', () => {
-    els.colorPickerModal.classList.remove('active');
-  });
+  const hidePanel = () => {
+    els.colorPickerPanel.classList.remove('active');
+  };
 
-  els.colorPickerModal.addEventListener('click', (e) => {
-    if (e.target === els.colorPickerModal) {
-      els.colorPickerModal.classList.remove('active');
-    }
-  });
+  const wrapper = els.colorPickerBtn.closest('.color-picker-wrapper');
+  
+  wrapper.addEventListener('mouseenter', showPanel);
+  wrapper.addEventListener('mouseleave', hidePanel);
 
   document.querySelectorAll('.color-option').forEach(option => {
     option.addEventListener('click', () => {
       const colorKey = option.dataset.color;
       applyBackgroundColor(colorKey, colorMap);
       localStorage.setItem('backgroundColor', colorKey);
-      els.colorPickerModal.classList.remove('active');
     });
   });
 };
