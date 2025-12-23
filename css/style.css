@@ -79,7 +79,7 @@ svg {
   bottom: 20px;
   right: 20px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 12px;
   z-index: 100;
 }
@@ -448,6 +448,33 @@ svg {
   margin-top: 20px;
   padding-top: 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.color-options {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.color-option {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 12px;
+  cursor: pointer;
+  border: 3px solid transparent;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.color-option:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.color-option.active {
+  border-color: #e63946;
+  box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.3);
 }
 
 @media print {

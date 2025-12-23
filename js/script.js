@@ -86,12 +86,16 @@ const setupUI = (svg, svgContainer, surahMap) => {
   setupZoom(els, svg);
   setupSearch(els, svgContainer, surahMap);
   setupDownload(els, svg);
+  setupColorPicker(els);
 };
 
 const getUIElements = () => ({
   zoomIn: document.getElementById('zoom-in'),
   zoomOut: document.getElementById('zoom-out'),
   zoomReset: document.getElementById('zoom-reset'),
+  colorPickerBtn: document.getElementById('color-picker-btn'),
+  colorPickerModal: document.getElementById('color-picker-modal'),
+  colorPickerCancel: document.getElementById('color-picker-cancel'),
   downloadBtn: document.getElementById('download-btn'),
   searchInput: document.getElementById('search-input'),
   clearBtn: document.getElementById('clear-search'),
@@ -362,6 +366,60 @@ const renderAndDownload = (clonedSVG, canvasWidth, canvasHeight, x, y, imgWidth,
   };
   
   img.src = url;
+};
+
+const setupColorPicker = (els) => {
+  const colorMap = {
+    'gradient-1': 'linear-gradient(135deg, #1a1f2e 0%, #2d1b3d 50%, #1a1f2e 100%)',
+    'gradient-2': 'linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%)',
+    'gradient-3': 'linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #1e3c72 100%)',
+    'gradient-4': 'linear-gradient(135deg, #2d1b3d 0%, #8b5a9f 50%, #2d1b3d 100%)',
+    'gradient-5': 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)',
+    'gradient-6': 'linear-gradient(135deg, #2c1810 0%, #8b4513 50%, #2c1810 100%)',
+    'gradient-7': 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%)',
+    'gradient-8': 'linear-gradient(135deg, #0d1b2a 0%, #1b263b 50%, #415a77 100%)'
+  };
+
+  const savedColor = localStorage.getItem('backgroundColor') || 'gradient-1';
+  applyBackgroundColor(savedColor, colorMap);
+
+  els.colorPickerBtn.addEventListener('click', () => {
+    els.colorPickerModal.classList.add('active');
+  });
+
+  els.colorPickerCancel.addEventListener('click', () => {
+    els.colorPickerModal.classList.remove('active');
+  });
+
+  els.colorPickerModal.addEventListener('click', (e) => {
+    if (e.target === els.colorPickerModal) {
+      els.colorPickerModal.classList.remove('active');
+    }
+  });
+
+  document.querySelectorAll('.color-option').forEach(option => {
+    option.addEventListener('click', () => {
+      const colorKey = option.dataset.color;
+      applyBackgroundColor(colorKey, colorMap);
+      localStorage.setItem('backgroundColor', colorKey);
+      els.colorPickerModal.classList.remove('active');
+    });
+  });
+};
+
+const applyBackgroundColor = (colorKey, colorMap) => {
+  const body = document.body;
+  const html = document.documentElement;
+  const gradient = colorMap[colorKey] || colorMap['gradient-1'];
+  body.style.background = gradient;
+  html.style.background = gradient;
+  
+  document.querySelectorAll('.color-option').forEach(opt => {
+    opt.classList.remove('active');
+    if (opt.dataset.color === colorKey) {
+      opt.classList.add('active');
+    }
+  });
 };
 
 loadSVG();

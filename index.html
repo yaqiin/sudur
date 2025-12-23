@@ -87,6 +87,16 @@
   </div>
 
   <div class="action-buttons">
+    <button id="color-picker-btn" class="action-btn" title="اختر لون الخلفية">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"></circle>
+        <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"></circle>
+        <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"></circle>
+        <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"></circle>
+        <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.926 1.648-1.648 0-.437-.18-.835-.437-1.125l-.027-.026c-.26-.26-.437-.65-.437-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"></path>
+      </svg>
+    </button>
     <button id="download-btn" class="action-btn" title="تحميل الصورة">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -95,6 +105,25 @@
         <line x1="12" y1="15" x2="12" y2="3"></line>
       </svg>
     </button>
+  </div>
+
+  <div id="color-picker-modal" class="modal">
+    <div class="modal-content">
+      <h2>اختر لون الخلفية</h2>
+      <div class="color-options">
+        <div class="color-option" data-color="gradient-1" style="background: linear-gradient(135deg, #1a1f2e 0%, #2d1b3d 50%, #1a1f2e 100%);"></div>
+        <div class="color-option" data-color="gradient-2" style="background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);"></div>
+        <div class="color-option" data-color="gradient-3" style="background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #1e3c72 100%);"></div>
+        <div class="color-option" data-color="gradient-4" style="background: linear-gradient(135deg, #2d1b3d 0%, #8b5a9f 50%, #2d1b3d 100%);"></div>
+        <div class="color-option" data-color="gradient-5" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);"></div>
+        <div class="color-option" data-color="gradient-6" style="background: linear-gradient(135deg, #2c1810 0%, #8b4513 50%, #2c1810 100%);"></div>
+        <div class="color-option" data-color="gradient-7" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);"></div>
+        <div class="color-option" data-color="gradient-8" style="background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 50%, #415a77 100%);"></div>
+      </div>
+      <div class="modal-buttons">
+        <button id="color-picker-cancel" class="modal-btn cancel-btn">إلغاء</button>
+      </div>
+    </div>
   </div>
 
   <div id="download-modal" class="modal">
