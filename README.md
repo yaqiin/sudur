@@ -9,4 +9,9 @@
 
 نرحب بمساهماتكم! يرجى الاطلاع على [CONTRIBUTING.md](CONTRIBUTING.md).
 
+
+## الترخيص
+
+هذا المشروع مرخص تحت رخصة MIT. راجع ملف [LICENSE](LICENSE) للتفاصيل.
+
 </div>
