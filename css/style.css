@@ -268,6 +268,45 @@ svg {
   background-color: rgba(34, 40, 49, 0.8);
 }
 
+.file-type-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.file-type-btn {
+  flex: 1;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(34, 40, 49, 0.6);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'Tajawal', Arial, sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.file-type-btn:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(34, 40, 49, 0.8);
+  color: #ffffff;
+}
+
+.file-type-btn.active {
+  border-color: #e63946;
+  background-color: rgba(230, 57, 70, 0.2);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.file-type-btn.active:hover {
+  border-color: #e63946;
+  background-color: rgba(230, 57, 70, 0.3);
+}
+
 .modal-buttons {
   display: flex;
   gap: 12px;

@@ -80,7 +80,7 @@ const setupSurahClickHandlers = (container, surahMap) => {
   const surahGroups = container.querySelectorAll('.surah-group');
   
   surahGroups.forEach(group => {
-    group.addEventListener('click', () => {
+      group.addEventListener('click', () => {
       const nameEl = group.querySelector('.surah-name');
       const name = nameEl ? nameEl.textContent.trim() : null;
       if (!name) return;
@@ -90,8 +90,8 @@ const setupSurahClickHandlers = (container, surahMap) => {
       
       paths.forEach(p => p.classList.toggle('active', !wasActive));
       updateLocalStorage(name, !wasActive);
-    });
-  });
+        });
+      });
 };
 
 const updateLocalStorage = (surahName, isSelected) => {
@@ -131,6 +131,7 @@ const getUIElements = () => ({
   customSizeCancel: document.getElementById('custom-size-cancel'),
   customWidth: document.getElementById('custom-width'),
   customHeight: document.getElementById('custom-height'),
+  fileTypeButtons: document.querySelectorAll('.file-type-btn'),
   customConfirm: document.getElementById('custom-download-confirm'),
   downloadOptions: document.querySelectorAll('.download-option-btn')
 });
@@ -313,9 +314,22 @@ const setupDownload = (els, svg) => {
     sizeError.style.display = 'block';
   };
 
+  const getSelectedFileType = () => {
+    const activeBtn = Array.from(els.fileTypeButtons).find(btn => btn.classList.contains('active'));
+    return activeBtn ? activeBtn.dataset.type : 'jpg';
+  };
+
+  els.fileTypeButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      els.fileTypeButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+
   const validateAndDownload = () => {
     const w = parseInt(els.customWidth.value);
     const h = parseInt(els.customHeight.value);
+    const fileType = getSelectedFileType();
     
     if (isNaN(w) || isNaN(h)) {
       showError('الرجاء إدخال أبعاد صحيحة');
@@ -333,7 +347,7 @@ const setupDownload = (els, svg) => {
     }
     
     hideError();
-    downloadImage(w, h, svg);
+    downloadImage(w, h, svg, fileType);
     els.customSizeModal.classList.remove('active');
   };
 
@@ -377,8 +391,13 @@ const setupDownload = (els, svg) => {
   els.customConfirm.addEventListener('click', validateAndDownload);
 };
 
-const downloadImage = (w, h, svg) => {
+const downloadImage = (w, h, svg, fileType = 'png') => {
   if (!svg) return;
+
+  if (fileType === 'svg') {
+    downloadSVG(svg, w, h);
+    return;
+  }
 
   const cloned = svg.cloneNode(true);
   cloned.style.transform = 'none';
@@ -388,7 +407,7 @@ const downloadImage = (w, h, svg) => {
   const { scaledWidth, scaledHeight, x, y } = calculateImageDimensions(w, h, svg);
   
   prepareSVGForDownload(cloned, svg, scaledWidth, scaledHeight);
-  renderAndDownload(cloned, w, h, x, y, scaledWidth, scaledHeight);
+  renderAndDownload(cloned, w, h, x, y, scaledWidth, scaledHeight, fileType);
 };
 
 const calculateImageDimensions = (w, h, svg) => {
@@ -437,12 +456,12 @@ const prepareSVGForDownload = (cloned, original, width, height) => {
   cloned.insertBefore(style, cloned.firstChild);
 };
 
-const renderAndDownload = (clonedSVG, canvasWidth, canvasHeight, x, y, imgWidth, imgHeight) => {
-  const canvas = document.createElement('canvas');
+const renderAndDownload = (clonedSVG, canvasWidth, canvasHeight, x, y, imgWidth, imgHeight, fileType = 'png') => {
+      const canvas = document.createElement('canvas');
   canvas.width = canvasWidth;
   canvas.height = canvasHeight;
-  const ctx = canvas.getContext('2d');
-  
+      const ctx = canvas.getContext('2d');
+
   const savedColor = localStorage.getItem('backgroundColor') || 'gradient-1';
   const colorValue = colorsConfig[savedColor] || colorsConfig['gradient-1'] || colorsConfig[Object.keys(colorsConfig)[0]] || '#1a1f2e';
   
@@ -473,26 +492,125 @@ const renderAndDownload = (clonedSVG, canvasWidth, canvasHeight, x, y, imgWidth,
   const blob = new Blob([new XMLSerializer().serializeToString(clonedSVG)], { 
     type: 'image/svg+xml;charset=utf-8' 
   });
-  const url = URL.createObjectURL(blob);
-  const img = new Image();
-  
+      const url = URL.createObjectURL(blob);
+      const img = new Image();
+
   img.onload = () => {
-    ctx.imageSmoothingEnabled = true;
-    ctx.imageSmoothingQuality = 'high';
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
     ctx.drawImage(img, x, y, imgWidth, imgHeight);
-    
+
+    const mimeType = fileType === 'jpg' ? 'image/jpeg' : 'image/png';
+    const quality = fileType === 'jpg' ? 0.92 : 1.0;
+    const extension = fileType === 'jpg' ? 'jpg' : 'png';
+
     canvas.toBlob(blob => {
-      const link = document.createElement('a');
-      link.download = `صورة-القرأن-${canvasWidth}x${canvasHeight}.png`;
-      link.href = URL.createObjectURL(blob);
-      link.click();
-      URL.revokeObjectURL(link.href);
-    }, 'image/png', 1.0);
-    
-    URL.revokeObjectURL(url);
-  };
+          const link = document.createElement('a');
+      link.download = `صورة-القرأن-${canvasWidth}x${canvasHeight}.${extension}`;
+          link.href = URL.createObjectURL(blob);
+          link.click();
+          URL.revokeObjectURL(link.href);
+    }, mimeType, quality);
+
+        URL.revokeObjectURL(url);
+      };
+
+      img.src = url;
+};
+
+const downloadSVG = (svg, width, height) => {
+  const cloned = svg.cloneNode(true);
+  cloned.style.transform = 'none';
+  cloned.style.width = '';
+  cloned.style.height = '';
   
-  img.src = url;
+  const viewBox = svg.getAttribute('viewBox') || '0 0 1080 1920';
+  const viewBoxValues = viewBox.split(/\s+/).map(Number);
+  const vbx = viewBoxValues[0] || 0;
+  const vby = viewBoxValues[1] || 0;
+  const vbw = viewBoxValues[2] || 1080;
+  const vbh = viewBoxValues[3] || 1920;
+  
+  cloned.removeAttribute('style');
+  cloned.removeAttribute('width');
+  cloned.removeAttribute('height');
+  cloned.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+  cloned.setAttribute('viewBox', viewBox);
+  cloned.setAttribute('width', width);
+  cloned.setAttribute('height', height);
+  
+  const savedColor = localStorage.getItem('backgroundColor') || 'gradient-1';
+  const colorValue = colorsConfig[savedColor] || colorsConfig['gradient-1'] || colorsConfig[Object.keys(colorsConfig)[0]] || '#1a1f2e';
+  
+  const style = document.createElementNS('http://www.w3.org/2000/svg', 'style');
+  style.textContent = `
+    .surah-path { fill: #ffffff; }
+    .surah-path.active { fill: #e63946; }
+    .surah-name { fill: #000000; font-family: 'Tajawal', Arial, sans-serif; font-size: 14px; font-weight: bold; pointer-events: none; user-select: none; }
+    .surah-path.active + .surah-name { fill: #ffffff; }
+  `;
+  
+  const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+  rect.setAttribute('x', vbx);
+  rect.setAttribute('y', vby);
+  rect.setAttribute('width', vbw);
+  rect.setAttribute('height', vbh);
+  
+  let defsElement = cloned.querySelector('defs');
+  if (!defsElement) {
+    defsElement = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+  }
+  
+  if (colorValue.startsWith('linear-gradient')) {
+    const gradient = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
+    gradient.setAttribute('id', 'bgGradient');
+    gradient.setAttribute('gradientUnits', 'userSpaceOnUse');
+    gradient.setAttribute('x1', vbx);
+    gradient.setAttribute('y1', vby);
+    gradient.setAttribute('x2', vbx + vbw);
+    gradient.setAttribute('y2', vby + vbh);
+    
+    const colorMatches = colorValue.matchAll(/#[0-9a-fA-F]{6}|#[0-9a-fA-F]{3}/g);
+    const colors = Array.from(colorMatches).map(m => m[0]);
+    const percentMatches = colorValue.matchAll(/(\d+(?:\.\d+)?)%/g);
+    const percents = Array.from(percentMatches).map(m => parseFloat(m[1]) / 100);
+    
+    colors.forEach((color, i) => {
+      const stop = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+      stop.setAttribute('offset', percents[i] !== undefined ? `${percents[i] * 100}%` : `${(i / (colors.length - 1 || 1)) * 100}%`);
+      stop.setAttribute('stop-color', color);
+      gradient.appendChild(stop);
+    });
+    
+    defsElement.appendChild(gradient);
+    rect.setAttribute('fill', 'url(#bgGradient)');
+  } else {
+    rect.setAttribute('fill', colorValue);
+  }
+  
+  defsElement.appendChild(style);
+  
+  if (!cloned.querySelector('defs')) {
+    cloned.insertBefore(defsElement, cloned.firstChild);
+  }
+  
+  const firstChild = cloned.firstChild;
+  if (firstChild && firstChild.nodeName === 'defs') {
+    cloned.insertBefore(rect, firstChild.nextSibling);
+  } else {
+    cloned.insertBefore(rect, cloned.firstChild);
+  }
+  
+  const serializer = new XMLSerializer();
+  const svgString = serializer.serializeToString(cloned);
+  const blob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  
+  const link = document.createElement('a');
+  link.download = `صورة-القرأن-${width}x${height}.svg`;
+  link.href = url;
+  link.click();
+  URL.revokeObjectURL(url);
 };
 
 const setupColorPicker = (els) => {
@@ -554,4 +672,4 @@ loadColors().then(() => {
 }).catch(() => {
   console.error('Failed to load colors, using defaults');
   loadSVG();
-});
+  });
