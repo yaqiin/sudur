@@ -1,32 +1,36 @@
-# Contribution Guidelines
+<div dir="rtl">
 
-Thank you for helping improve this project! Choose how you'd like to contribute:
+# إرشادات المساهمة
 
-## 🐛 Report bugs
+شكرًا لمساعدتك في تحسين هذا المشروع! اختر كيف تريد المساهمة:
 
-- Check existing [issues](https://github.com/yaqiin/sudur/issues) first
-- Open a new issue if it's not reported yet
-- Include steps to reproduce the bug
+## 🐛 الإبلاغ عن الأخطاء
 
-## 💡 Suggest Improvements
+- تحقق من [المشاكل](https://github.com/yaqiin/sudur/issues) الموجودة أولاً
+- افتح مشكلة جديدة إذا لم يتم الإبلاغ عنها بعد
+- أضف خطوات لإعادة إنتاج الخطأ
 
-- Open an [issue](https://github.com/yaqiin/sudur/issues) to discuss your idea
-- We will let you know if it fits the project
+## 💡 اقتراح التحسينات
 
-## 🛠️ Development
+- افتح [مشكلة](https://github.com/yaqiin/sudur/issues) لمناقشة فكرتك
+- سنخبرك إذا كانت مناسبة للمشروع
 
-All pull requests need review before merging. We appreciate your help!
+## 🛠️ التطوير
 
-Here's how to get started:
+جميع طلبات السحب تحتاج إلى مراجعة قبل الدمج. نقدر مساعدتك!
 
-- Find an issue to work on (or start a new one)
-- Fork the repo and make your changes
-- Open a [pull request](https://github.com/yaqiin/sudur/pulls) with:
-  - Description of your changes
-  - Links to any related issues
+إليك كيفية البدء:
 
-### 🚀 Code Contributions
+- ابحث عن مشكلة للعمل عليها (أو ابدأ مشكلة جديدة)
+- انسخ المستودع واجرِ تغييراتك
+- افتح [طلب سحب](https://github.com/yaqiin/sudur/pulls) مع:
+  - وصف لتغييراتك
+  - روابط لأي مشاكل ذات صلة
 
-- Refactor/Improve existing code
-- Add new feature
-- Fix bugs
+### 🚀 مساهمات الكود
+
+- إعادة هيكلة/تحسين الكود الموجود
+- إضافة ميزة جديدة
+- إصلاح الأخطاء
+
+</div>
