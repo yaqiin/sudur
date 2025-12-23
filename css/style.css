@@ -45,12 +45,30 @@ html, body {
 }
 
 svg {
-  width: 90vw;
-  max-width: 500px;
+  width: min(90vw, 90vh);
+  max-width: min(800px, 90vh);
   height: auto;
   display: block;
   direction: ltr;
   transition: transform 0.2s ease;
+}
+
+@media (min-width: 768px) {
+  svg {
+    max-width: min(1000px, 85vh);
+  }
+}
+
+@media (min-width: 1200px) {
+  svg {
+    max-width: min(1200px, 65vh);
+  }
+}
+
+@media (min-width: 1920px) {
+  svg {
+    max-width: min(1400px, 75vh);
+  }
 }
 
 .surah-path {
