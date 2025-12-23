@@ -171,6 +171,8 @@ const setupZoom = (els, svg) => {
 };
 
 const setupSearch = (els, svgContainer, surahMap) => {
+  let isClickingOnItem = false;
+
   const showResults = () => {
     if (els.searchInput.value.trim()) {
       els.resultsPanel.classList.add('active');
@@ -182,6 +184,7 @@ const setupSearch = (els, svgContainer, surahMap) => {
   };
 
   const hideResults = () => {
+    if (isClickingOnItem) return;
     els.resultsPanel.classList.remove('active');
     els.searchInput.value = '';
     els.results.innerHTML = '';
@@ -221,6 +224,19 @@ const setupSearch = (els, svgContainer, surahMap) => {
       hideResults();
     }
   });
+
+  document.addEventListener('click', (e) => {
+    if (!els.resultsPanel.classList.contains('active')) return;
+    
+    const searchBar = els.searchInput.closest('.search-bar');
+    const clickedOnSearchBar = searchBar && searchBar.contains(e.target);
+    const clickedOnDropdown = els.resultsPanel.contains(e.target);
+    const clickedOnResultItem = e.target.closest('.search-result-item') !== null;
+    
+    if (!clickedOnSearchBar && !clickedOnDropdown && !clickedOnResultItem) {
+      hideResults();
+    }
+  });
 };
 
 const createSearchResultItem = (name, group, svgContainer, els, hideResults) => {
@@ -229,7 +245,12 @@ const createSearchResultItem = (name, group, svgContainer, els, hideResults) => 
   item.className = `search-result-item ${isActive ? 'active' : ''}`;
   item.innerHTML = `<span class="result-text">${name}</span>${isActive ? '<span class="result-badge">✓</span>' : ''}`;
   
-  item.addEventListener('click', () => {
+  item.addEventListener('mousedown', (e) => {
+    e.stopPropagation();
+  });
+  
+  item.addEventListener('click', (e) => {
+    e.stopPropagation();
     if (group) {
       const paths = group.querySelectorAll('.surah-path');
       const wasActive = paths[0].classList.contains('active');
