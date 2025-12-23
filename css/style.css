@@ -446,10 +446,50 @@ svg {
   color: rgba(255, 255, 255, 0.7);
 }
 
+.size-presets {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.preset-btn {
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(34, 40, 49, 0.6);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Tajawal', Arial, sans-serif;
+}
+
+.preset-btn:hover {
+  background-color: rgba(34, 40, 49, 0.8);
+  border-color: rgba(230, 57, 70, 0.5);
+  transform: translateY(-2px);
+}
+
+.preset-btn:active {
+  transform: translateY(0);
+}
+
 .custom-size-inputs {
-  margin-top: 20px;
-  padding-top: 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.size-error {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background-color: rgba(230, 57, 70, 0.2);
+  border: 1px solid rgba(230, 57, 70, 0.5);
+  color: #ff6b7a;
+  font-size: 14px;
+  text-align: right;
 }
 
 .color-picker-wrapper {

@@ -1,0 +1,34 @@
+[
+  {
+    "id": "gradient-1",
+    "color": "linear-gradient(135deg, #1a1f2e 0%, #2d1b3d 50%, #1a1f2e 100%)"
+  },
+  {
+    "id": "gradient-2",
+    "color": "linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%)"
+  },
+  {
+    "id": "gradient-3",
+    "color": "linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #1e3c72 100%)"
+  },
+  {
+    "id": "gradient-4",
+    "color": "linear-gradient(135deg, #2d1b3d 0%, #8b5a9f 50%, #2d1b3d 100%)"
+  },
+  {
+    "id": "gradient-5",
+    "color": "linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)"
+  },
+  {
+    "id": "gradient-6",
+    "color": "linear-gradient(135deg, #2c1810 0%, #8b4513 50%, #2c1810 100%)"
+  },
+  {
+    "id": "gradient-8",
+    "color": "linear-gradient(135deg, #0d1b2a 0%, #1b263b 50%, #415a77 100%)"
+  },
+  {
+    "id": "solid-1",
+    "color": "#222831"
+  }
+]

@@ -24,12 +24,12 @@
   <meta property="twitter:title" content="فِي صُدُورِ الَّذِينَ أُوتُوا الْعِلْمَ">
   <meta property="twitter:description" content="تطبيق تفاعلي لقلب مصمم من سور القرآن الكريم | Interactive Quran heart application">
   
-  <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="assets/android-chrome-192x192.png">
-  <link rel="icon" type="image/png" sizes="512x512" href="assets/android-chrome-512x512.png">
+  <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/images/android-chrome-192x192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/images/android-chrome-512x512.png">
   <link rel="manifest" href="assets/site.webmanifest">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -100,14 +100,6 @@
       </button>
       <div id="color-picker-panel" class="color-picker-panel">
         <div class="color-options">
-          <div class="color-option" data-color="gradient-1" style="background: linear-gradient(135deg, #1a1f2e 0%, #2d1b3d 50%, #1a1f2e 100%);"></div>
-          <div class="color-option" data-color="gradient-2" style="background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);"></div>
-          <div class="color-option" data-color="gradient-3" style="background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #1e3c72 100%);"></div>
-          <div class="color-option" data-color="gradient-4" style="background: linear-gradient(135deg, #2d1b3d 0%, #8b5a9f 50%, #2d1b3d 100%);"></div>
-          <div class="color-option" data-color="gradient-5" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);"></div>
-          <div class="color-option" data-color="gradient-6" style="background: linear-gradient(135deg, #2c1810 0%, #8b4513 50%, #2c1810 100%);"></div>
-          <div class="color-option" data-color="gradient-7" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);"></div>
-          <div class="color-option" data-color="gradient-8" style="background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 50%, #415a77 100%);"></div>
         </div>
       </div>
     </div>
@@ -142,15 +134,22 @@
   <div id="custom-size-modal" class="modal">
     <div class="modal-content">
       <h2>حجم مخصص</h2>
+      <div class="size-presets">
+        <button class="preset-btn" data-width="1920" data-height="1080">1920 × 1080</button>
+        <button class="preset-btn" data-width="2560" data-height="1440">2560 × 1440</button>
+        <button class="preset-btn" data-width="3840" data-height="2160">3840 × 2160</button>
+        <button class="preset-btn" data-width="1080" data-height="1080">1080 × 1080</button>
+      </div>
       <div id="custom-size-inputs" class="custom-size-inputs">
         <div class="input-group">
           <label for="custom-width">العرض (بكسل)</label>
-          <input type="number" id="custom-width" min="100" max="10000" value="1920">
+          <input type="number" id="custom-width" min="100" max="10000" value="1920" placeholder="100-10000">
         </div>
         <div class="input-group">
           <label for="custom-height">الارتفاع (بكسل)</label>
-          <input type="number" id="custom-height" min="100" max="10000" value="1080">
+          <input type="number" id="custom-height" min="100" max="10000" value="1080" placeholder="100-10000">
         </div>
+        <div id="size-error" class="size-error" style="display: none;"></div>
       </div>
       <div class="modal-buttons">
         <button id="custom-size-cancel" class="modal-btn cancel-btn">إلغاء</button>
