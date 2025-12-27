@@ -23,6 +23,7 @@ html, body {
   padding-bottom: 0;
   width: 100%;
   max-width: 900px;
+  pointer-events: none;
 }
 
 .verse-text {
@@ -59,6 +60,7 @@ html, body {
   overflow: auto;
   padding-top: 280px;
   padding-bottom: 280px;
+  pointer-events: auto;
 }
 
 svg {
